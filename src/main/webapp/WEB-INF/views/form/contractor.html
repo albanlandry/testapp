@@ -8,9 +8,9 @@
 <body>
 	<div class="container">
 		<h2>New Contractor</h2>
-		<div class="row">
-			<div class="col-lg-6">
-				<form method="post" action="submit">
+		<form method="post" action="submit">
+			<div class="row">
+				<div class="col-lg-6">
 				    <div class="input-group">
 				      <span class="input-group-addon">Company</span>
 				      <input id="company" type="text" class="form-control" name="company">
@@ -55,30 +55,30 @@
 				      <span class="input-group-addon">Company</span>
 				      <input id="company" type="text" class="form-control" name="company" placeholder="Email">
 				    </div>
-			    </form>
+				</div>
+				
+				<div class="col-lg-6">
+					<table class="table">
+						    <thead>
+						      <tr>
+						        <th>N0.</th>
+						        <th>담당자</th>
+						        <th>부서명</th>
+						        <th>담당자 전화번호</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						    </tbody>
+					</table>
+				</div>
 			</div>
-
-			<div class="col-lg-6">
-				<table class="table">
-					    <thead>
-					      <tr>
-					        <th>N0.</th>
-					        <th>담당자</th>
-					        <th>부서명</th>
-					        <th>담당자 전화번호</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					    </tbody>
-				</table>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<input type="submit" class="btn btn-primary pull-right" value="Submit" />
+				</div>
 			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-lg-12">
-				<input type="submit" class="btn btn-primary pull-right" value="Submit" />
-			</div>
-		</div>
+		</form>
 	</div>
 </body>
 </html>
