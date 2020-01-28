@@ -1,4 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="test.kneteng.testapp.mapper.ContractorMapper">
+	<resultMap type="Contractor" id="ContractorResult">
+		<result property = "contractorNo" column = "contractor_id"/>
+		<result property = "company" column = "company"/>
+		<result property = "crn" column = "crn"/>
+		<result property = "owner" column = "owner"/>
+		<result property = "address" column = "address"/>
+		<result property = "business" column = "business"/>
+		<result property = "item" column = "item"/>
+		<result property = "tel" column = "tel"/>
+		<result property = "fax" column = "fax"/>
+		<result property = "accountNo" column = "account_id"/>
+		<result property = "lastDate" column = "last_date"/>
+		<result property = "date" column = "date"/>
+		<result property = "requisitionForm" column = "requisition_form "/>
+		<result property = "specification" column = "specification"/>
+		<result property = "productDrawing" column = "product_drawing"/>
+		<association property="manager" resultMap="ManagerResult"/>
+	</resultMap>
+	
+	<!-- Selections -->
+   	<select id = "findAll" resultMap = "ContractorResult">
+		SELECT * 
+		FROM CONTRACTOR C LEFT OUTER JOIN MANAGER M ON C.MANAGER_ID = M.MANAGER_ID; 
+   	</select>
+   	
+   	<select id = "findById" parameterType = "int" resultMap = "ContractorResult">
+		SELECT * 
+		FROM CONTRACTOR C LEFT OUTER JOIN MANAGER M ON C.MANAGER_ID = M.MANAGER_ID;
+		WHERE C.CONTRACTOR_ID = #{contractorNo}
+   	</select>
+   	
+	<!-- Deletion -->
+	<delete id = "delete" parameterType = "int">
+	   DELETE FROM CONTRACTOR WHERE id = #{contractorNo};
+	</delete>
+	
+	<!-- Insertion -->
+	<insert id="insert" parameterType="Contractor" useGeneratedKeys="true" keyProperty="contractor_id">
+		INSERT INTO Manager(company, crn, owner, address, business, item, tel, fax, account_id, last_date, date, requisition_form , specification, product_drawing, manager_id)
+		VALUES(#{company}, #{crn}, #{owner}, #{address}, #{business}, #{item}, #{tel}, #{fax}, #{accountNo}, #{lastDate}, #{date}, #{requisitionForm}, #{specification}, #{productDrawing}, #{manager.managerNo})
+	</insert>
+	
+	<!-- Update contractor -->
+	<update id="update" parameterType="Contractor">
+		UPDATE Manager 
+		SET company = #{company}, 
+			crn = #{crn}, 
+			owner = #{owner}, 
+			address = #{address},
+			business = #{business}, 
+			item = #{item}, 
+			tel = #{tel}, 
+			fax = #{fax}, 
+			account_id = #{accountNo}, 
+			last_date = #{lastDate}, 
+			date = #{date}, 
+			requisition_form = #{requisitionForm}, 
+			specification = #{specification}, 
+			product_drawing = #{productDrawing}, 
+			manager_id = #{manager.managerNo}
+			WHERE contractor_id = contractorNo
+	</update>
 </mapper>

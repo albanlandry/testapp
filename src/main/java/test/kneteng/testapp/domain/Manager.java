@@ -1,60 +1,60 @@
 package test.kneteng.testapp.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Manager implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-  private static final long serialVersionUID = 1L;
+  	private int managerNo;
+  	private String name;
+  	private String department;
+  	private String tel;
+  	private List<Contractor> contractors;
 
-  private int managerNo;
-  private int contractorNo;
-  private String name;
-  private String department;
-  private String tel;
+  	public int getManagerNo() {
+	  	return managerNo;
+  	}
 
-  public int getManagerNo() {
-    return managerNo;
-  }
+  	public void setManagerNo(int managerNo) {
+	  	this.managerNo = managerNo;
+  	}
 
-  public void setManagerNo(int managerNo) {
-    this.managerNo = managerNo;
-  }
+  	public String getName() {
+	  	return name;
+  	}
 
-  public String getName() {
-    return name;
-  }
+  	public void setName(String name) {
+	  	this.name = name;
+  	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+  	public String getDepartment() {
+  		return department;
+    }
 
-  public String getDepartment() {
-    return department;
-  }
+  	public void setDepartment(String department) {
+  		this.department = department;
+  	}
 
-  public void setDepartment(String department) {
-    this.department = department;
-  }
+  	public String getTel() {
+  		return tel;
+  	}
 
-  public String getTel() {
-    return tel;
-  }
+  	public void setTel(String tel) {
+  		this.tel = tel;
+  	}
 
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
+  	public List<Contractor> getContractors() {
+  		return contractors;
+  	}
 
-  public int getContractorNo() {
-    return contractorNo;
-  }
+	public void setContractors(List<Contractor> contractors) {
+		this.contractors = contractors;
+	}
 
-  public void setContractorNo(int contractorNo) {
-    this.contractorNo = contractorNo;
-  }
-
-  @Override
-  public String toString() {
-    return "Manager [managerNo=" + managerNo + ", contractorNo=" + contractorNo + ", name=" + name
-        + ", department=" + department + ", tel=" + tel + "]";
-  }
+	@Override
+	public String toString() {
+	    return "Manager [managerNo=" + managerNo + ", name=" + name
+	    + ", department=" + department + ", tel=" + tel + "]";
+	}
 }

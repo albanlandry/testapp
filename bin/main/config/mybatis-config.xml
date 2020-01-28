@@ -26,9 +26,7 @@
 	
    <mappers>
       <mapper resource = "mapper/MemberMapper.xml"/>
-      <!-- 
       <mapper resource = "mapper/ContractorMapper.xml"/>
-      -->
       <mapper resource = "mapper/ManagerMapper.xml"/>
    </mappers>
 </configuration>

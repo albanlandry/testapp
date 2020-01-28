@@ -3,15 +3,16 @@
 <mapper namespace="test.kneteng.testapp.mapper.ManagerMapper">
 	<resultMap type="Manager" id="ManagerResult">
 		<result property = "managerNo" column = "manager_id"/>
-		<result property = "contractorNo" column = "contractor_id"/>
 		<result property = "name" column = "name"/>
 		<result property = "department" column = "department"/>
 		<result property = "tel" column = "tel"/>
+		<collection property="contractors" ofType="Contractor" resultMap="ContractorResult">
+		</collection>
 	</resultMap>
 	
 	<!-- Selection -->
    	<select id = "findAll" resultMap = "ManagerResult">
-		SELECT * FROM MANAGER; 
+		SELECT * FROM MANAGER M LEFT OUTER JOIN CONTRACTOR C ON M.MANAGER_ID = C.MANAGER_ID; 
    	</select>
    
    	<select id = "findById" parameterType = "int" resultMap = "ManagerResult">
@@ -25,15 +26,14 @@
 	
    <!-- Adding a new Manager -->
 	<insert id="insert" parameterType="Manager" useGeneratedKeys="true" keyProperty="manager_id">
-		INSERT INTO Manager(contractor_id, name, department, tel)
-		VALUES(#{contractor_id}, #{name}, #{department}, #{tel});
+		INSERT INTO Manager(name, department, tel)
+		VALUES(#{name}, #{department}, #{tel});
 	</insert>
 
 	<!-- Update a Manager -->
 	<update id="update" parameterType="Manager">
 		UPDATE Manager
-		SET contractor_id = #{contractorNo}, 
-			name = #{name}, 
+		SET name = #{name}, 
 			department = #{department}, 
 			tel = #{tel}
 		WHERE manager_id = {managerNo};

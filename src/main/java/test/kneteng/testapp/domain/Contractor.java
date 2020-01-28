@@ -2,7 +2,6 @@ package test.kneteng.testapp.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 public class Contractor implements Serializable {
 
@@ -33,8 +32,6 @@ public class Contractor implements Serializable {
 
   // Manager
   private Manager manager;
-  List<Manager> managers;
-
 
   public int getContractorNo() {
     return contractorNo;
@@ -156,14 +153,6 @@ public class Contractor implements Serializable {
     this.productDrawing = productDrawing;
   }
 
-  public List<Manager> getManagers() {
-    return managers;
-  }
-
-  public void setManagers(List<Manager> managers) {
-    this.managers = managers;
-  }
-
   public Manager getManager() {
     return manager;
   }
@@ -179,6 +168,6 @@ public class Contractor implements Serializable {
         + ", tel=" + tel + ", fax=" + fax + ", accountNo=" + accountNo + ", lastDate=" + lastDate
         + ", date=" + date + ", requisitionForm=" + requisitionForm + ", specification="
         + specification + ", productDrawing=" + productDrawing + ", manager=" + manager
-        + ", managers=" + managers + "]";
+        + "]";
   }
 }

@@ -11,9 +11,9 @@ public interface ContractorMapper {
 	  
 	  int update(Contractor contractor);
 	  
-	  Contractor findBy(int no);
+	  Contractor findById(int no);
 	  
 	  int delete(int no);
 	  
-	  int countAll();
+	  // int countAll();
 }
