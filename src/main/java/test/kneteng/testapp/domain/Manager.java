@@ -1,7 +1,6 @@
 package test.kneteng.testapp.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Manager implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,7 +9,7 @@ public class Manager implements Serializable {
   	private String name;
   	private String department;
   	private String tel;
-  	private List<Contractor> contractors;
+  	private Contractor contractor;
 
   	public int getManagerNo() {
 	  	return managerNo;
@@ -44,17 +43,17 @@ public class Manager implements Serializable {
   		this.tel = tel;
   	}
 
-  	public List<Contractor> getContractors() {
-  		return contractors;
+  	public Contractor getContractor() {
+  		return contractor;
   	}
 
-	public void setContractors(List<Contractor> contractors) {
-		this.contractors = contractors;
+	public void setContractor(Contractor contractor) {
+		this.contractor = contractor;
 	}
 
 	@Override
 	public String toString() {
-	    return "Manager [managerNo=" + managerNo + ", name=" + name
-	    + ", department=" + department + ", tel=" + tel + "]";
+	    return "{managerNo:" + managerNo + ", name:" + name
+	    + ", department:" + department + ", tel:" + tel + "}";
 	}
 }

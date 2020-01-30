@@ -9,11 +9,12 @@ public interface ContractorMapper {
 	  
 	  List<Contractor> findAll();
 	  
+	  List<Contractor> getByPage();
+	  
 	  int update(Contractor contractor);
 	  
 	  Contractor findById(int no);
 	  
 	  int delete(int no);
-	  
 	  // int countAll();
 }

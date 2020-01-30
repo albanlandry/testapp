@@ -37,7 +37,7 @@ class TestappApplicationTests {
 	public void getBlogById() throws Exception 
 	{
 	     List<Member> members =  memberService.list();
-	     List<Manager> managers = managerService.list();
+	     // List<Manager> managers = managerService.list();
 	     List<Contractor> contractors = contractorService.list();
 	     /*
 	     Blog blog = blogMapper.getBlogById(1);

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="UTF-8">
+		<title>New Contractor</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h2>New Contractor</h2>
+		<form method="post" action="" th:action="@{save}" th:object="${contractor}">
+			<div class="row">
+				<input th:if="*{contractorNo} != 0" id="company" type="hidden" th:field="*{contractorNo}"/>
+				<div class="col-lg-4">
+				    <div class="input-group">
+				      <span class="input-group-addon">업체명</span>
+				      <input id="company" type="text" class="form-control" th:field="*{company}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">사업자등록번호</span>
+				      <input id="crn" type="text" class="form-control" th:field="*{crn}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">사업주</span>
+				      <input id="owner" type="text" class="form-control" th:field="*{owner}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">소재지</span>
+				      <input id="address" type="text" class="form-control" th:field="*{address}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">업태</span>
+				      <input id="business" type="text" class="form-control" th:field="*{business}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">종목</span>
+				      <input id="item" type="text" class="form-control" th:field="*{item}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">계좌번호</span>
+				      <input id="accountNo" type="text" class="form-control" th:field="*{accountNo}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">전화번호</span>
+				      <input id="tel" type="text" class="form-control" th:field="*{tel}"/>
+				    </div>
+				    
+				    <div class="input-group">
+				      <span class="input-group-addon">팩스번호</span>
+				      <input id="fax" type="text" class="form-control" th:field="*{fax}"/>
+				    </div>
+				</div>
+				
+				<div class="col-lg-6">
+					<table class="table">
+						    <thead>
+						      <tr>
+						        <th>N0.</th>
+						        <th>담당자</th>
+						        <th>부서명</th>
+						        <th>담당자 전화번호</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+				                <tr th:each="manager, itemStat : *{managers}">
+				                	<td th:text="${itemStat.index + 1}"></td>
+				                	<td><input id="name" type="text" class="form-control" th:field="*{managers[__${itemStat.index}__].name}"/></td>
+				                	<td><input id="department" type="text" class="form-control" th:field="*{managers[__${itemStat.index}__].department}"/></td>
+				                	<td><input id="tel" type="text" class="form-control" th:field="*{managers[__${itemStat.index}__].tel}"/></td>
+				                </tr>
+						    </tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-10">
+					<input type="submit" class="btn btn-primary pull-right" value="등록" />
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

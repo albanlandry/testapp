@@ -2,6 +2,9 @@ package test.kneteng.testapp.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
 
 public class Contractor implements Serializable {
 
@@ -9,11 +12,11 @@ public class Contractor implements Serializable {
 
   private int contractorNo;
   private String company;
-  // company registration number ?‚¬?—…? ?“±ë¡ë²ˆ?˜¸
+  // company registration number ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë¡ë²ˆ?ï¿½ï¿½
   private String crn;
   private String owner;
   private String address;
-  // ?—…?ƒœ
+  // ?ï¿½ï¿½?ï¿½ï¿½
   private String business;
   // ì¢…ëª©
   private String item;
@@ -23,17 +26,39 @@ public class Contractor implements Serializable {
   private String accountNo;
   private Date lastDate;
   private Date date;
-  // ë¶??’ˆ ê°œë°œ ?š”ì²??„œ
+  // ï¿½??ï¿½ï¿½ ê°œë°œ ?ï¿½ï¿½ï¿½??ï¿½ï¿½
   private String requisitionForm;
-  // ?‹œë°©ì„œ
+  // ?ï¿½ï¿½ë°©ì„œ
   private String specification;
-  // ? œ?’ˆ ?„ë©?
+  // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?
   private String productDrawing;
 
-  // Manager
-  private Manager manager;
+  // Managers
+  private List<Manager> managers;
 
-  public int getContractorNo() {
+  
+  
+  public Contractor() {
+	super();
+	this.contractorNo = 0;
+	this.company = "";
+	this.crn = "";
+	this.owner = "";
+	this.address = "";
+	this.business = "";
+	this.item = "";
+	this.tel = "";
+	this.fax = "";
+	this.accountNo = "";
+	this.lastDate = null;
+	this.date = null;
+	this.requisitionForm = "";
+	this.specification = "";
+	this.productDrawing = "";
+	this.managers = null;
+}
+
+public int getContractorNo() {
     return contractorNo;
   }
 
@@ -153,21 +178,21 @@ public class Contractor implements Serializable {
     this.productDrawing = productDrawing;
   }
 
-  public Manager getManager() {
-    return manager;
-  }
+  	public List<Manager> getManagers() {
+  		return managers;
+	}
+	
+	public void setManagers(List<Manager> managers) {
+		this.managers = managers;
+	}
 
-  public void setManager(Manager manager) {
-    this.manager = manager;
-  }
-
-  @Override
+@Override
   public String toString() {
-    return "Contractor [contractorNo=" + contractorNo + ", company=" + company + ", crn=" + crn
-        + ", owner=" + owner + ", address=" + address + ", business=" + business + ", item=" + item
-        + ", tel=" + tel + ", fax=" + fax + ", accountNo=" + accountNo + ", lastDate=" + lastDate
-        + ", date=" + date + ", requisitionForm=" + requisitionForm + ", specification="
-        + specification + ", productDrawing=" + productDrawing + ", manager=" + manager
-        + "]";
+    return "{contractorNo:" + contractorNo + ", company:" + company + ", crn:" + crn
+        + ", owner:" + owner + ", address:" + address + ", business:" + business + ", item:" + item
+        + ", tel:" + tel + ", fax:" + fax + ", accountNo:" + accountNo + ", lastDate:" + lastDate
+        + ", date:" + date + ", requisitionForm:" + requisitionForm + ", specification:"
+        + specification + ", productDrawing:" + productDrawing + ", managers:["+managers
+        + "]}";
   }
 }

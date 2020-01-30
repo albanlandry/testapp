@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import test.kneteng.testapp.domain.Contractor;
-import test.kneteng.testapp.domain.Member;
 import test.kneteng.testapp.mapper.ContractorMapper;
 import test.kneteng.testapp.util.MyBatisUtil;
 
@@ -17,8 +16,7 @@ public class ContractorService {
 		try{
 			ContractorMapper contractorMapper = sqlSession.getMapper(ContractorMapper.class);
 			contractorMapper.insert(contractor);
-		}catch(Exception e) {
-			throw new Exception(e.getMessage());
+			sqlSession.commit();
 		}finally{
 			sqlSession.close();
 		}
@@ -29,8 +27,7 @@ public class ContractorService {
 		try{
 			ContractorMapper contractorMapper = sqlSession.getMapper(ContractorMapper.class);
 			contractorMapper.delete(id);
-		}catch(Exception e) {
-			throw new Exception(e.getMessage());
+			sqlSession.commit();
 		}finally{
 			sqlSession.close();
 		}
@@ -41,6 +38,7 @@ public class ContractorService {
 		try{
 			ContractorMapper contractorMapper = sqlSession.getMapper(ContractorMapper.class);
 			contractorMapper.update(contractor);
+			sqlSession.commit();
 		}catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}finally{
@@ -53,6 +51,8 @@ public class ContractorService {
 		try{
 			ContractorMapper contractorMapper = sqlSession.getMapper(ContractorMapper.class);
 			return contractorMapper.findAll();
+		}catch(Exception e) {
+			throw new Exception(e.getMessage());
 		}finally{
 			sqlSession.close();
 		}

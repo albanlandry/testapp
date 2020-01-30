@@ -6,8 +6,7 @@
 		<result property = "name" column = "name"/>
 		<result property = "department" column = "department"/>
 		<result property = "tel" column = "tel"/>
-		<collection property="contractors" ofType="Contractor" resultMap="ContractorResult">
-		</collection>
+		<association property="contractor" resultMap="ContractorResult"/>
 	</resultMap>
 	
 	<!-- Selection -->
@@ -16,7 +15,9 @@
    	</select>
    
    	<select id = "findById" parameterType = "int" resultMap = "ManagerResult">
-      	SELECT * FROM MANAGER WHERE ID = #{id};
+      	SELECT * 
+      	FROM MANAGER M LEFT OUTER JOIN CONTRACTOR C ON M.MANAGER_ID = C.MANAGER_ID 
+      	WHERE ID = #{id};
    	</select>
    	
 	<!-- Deletion -->
@@ -25,9 +26,9 @@
 	</delete>
 	
    <!-- Adding a new Manager -->
-	<insert id="insert" parameterType="Manager" useGeneratedKeys="true" keyProperty="manager_id">
-		INSERT INTO Manager(name, department, tel)
-		VALUES(#{name}, #{department}, #{tel});
+	<insert id="insert" parameterType="Manager" useGeneratedKeys="true" keyProperty="managerNo">
+		INSERT INTO Manager(name, department, tel, contractor_id)
+		VALUES(#{name}, #{department}, #{tel}, #{contractor.contractorNo});
 	</insert>
 
 	<!-- Update a Manager -->
@@ -35,7 +36,8 @@
 		UPDATE Manager
 		SET name = #{name}, 
 			department = #{department}, 
-			tel = #{tel}
+			tel = #{tel},
+			contractor_id = contractor.contractorNo
 		WHERE manager_id = {managerNo};
 	</update>
 </mapper>

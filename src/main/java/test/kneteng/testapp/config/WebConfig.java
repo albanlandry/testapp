@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -31,6 +32,7 @@ public class WebConfig implements WebMvcConfigurer{
 	    templateResolver.setApplicationContext(this.applicationContext);
 	    templateResolver.setPrefix("/WEB-INF/views/");
 	    templateResolver.setSuffix(".html");
+	    templateResolver.setCharacterEncoding("UTF-8");
 	    // HTML is the default value, added here for the sake of clarity.
 	    templateResolver.setTemplateMode(TemplateMode.HTML);
 	    // Template cache is true by default. Set to false if you want
@@ -62,12 +64,13 @@ public class WebConfig implements WebMvcConfigurer{
 	public ThymeleafViewResolver viewResolver() {
 	    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 	    viewResolver.setTemplateEngine(templateEngine());
+	    viewResolver.setContentType("UTF-8");
 	    viewResolver.setOrder(1);
 	    return viewResolver;
 	}
 	
 	/**
-	 * The th:text=¡±#{key}¡± tag attribute can be used to display values from property files. 
+	 * The th:text=ï¿½ï¿½#{key}ï¿½ï¿½ tag attribute can be used to display values from property files. 
 	 * For this to work the property file must be configured as messageSource bean.
 	 * */
 	@Bean

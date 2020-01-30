@@ -16,6 +16,7 @@ public class ManagerService {
 		try{
 			ManagerMapper managerMapper = sqlSession.getMapper(ManagerMapper.class);
 			managerMapper.insert(manager);
+			sqlSession.commit();
 		}catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}finally{
@@ -28,6 +29,7 @@ public class ManagerService {
 		try{
 			ManagerMapper managerMapper = sqlSession.getMapper(ManagerMapper.class);
 			managerMapper.delete(id);
+			sqlSession.commit();
 		}catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}finally{
@@ -40,6 +42,7 @@ public class ManagerService {
 		try{
 			ManagerMapper managerMapper = sqlSession.getMapper(ManagerMapper.class);
 			managerMapper.update(manager);
+			sqlSession.commit();
 		}catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}finally{
