@@ -51,6 +51,12 @@ public class Manager implements Serializable {
 		this.contractor = contractor;
 	}
 
+	public boolean isEmpty() {
+		return  (this.getTel() == null || this.getTel().isEmpty())
+				&& (this.getName() == null || this.getName().isEmpty())
+				&& (this.getDepartment() == null || this.getDepartment().isEmpty());
+	}
+	
 	@Override
 	public String toString() {
 	    return "{managerNo:" + managerNo + ", name:" + name

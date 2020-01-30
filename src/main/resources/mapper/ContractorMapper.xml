@@ -43,7 +43,7 @@
    	
 	<!-- Deletion -->
 	<delete id = "delete" parameterType = "int">
-	   DELETE FROM CONTRACTOR WHERE id = #{contractorNo};
+	   DELETE FROM CONTRACTOR WHERE contractor_id = #{contractorNo};
 	</delete>
 	
 	<!-- Insertion -->
@@ -64,11 +64,10 @@
 			tel = #{tel}, 
 			fax = #{fax}, 
 			account_id = #{accountNo}, 
-			last_date = #{lastDate}, 
-			date = #{date}, 
+			last_date = NOW(),  
 			requisition_form = #{requisitionForm}, 
 			specification = #{specification}, 
-			product_drawing = #{productDrawing}, 
-			WHERE contractor_id = contractorNo
+			product_drawing = #{productDrawing} 
+			WHERE contractor_id = #{contractorNo}
 	</update>
 </mapper>

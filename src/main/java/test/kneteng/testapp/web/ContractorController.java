@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-
 import test.kneteng.testapp.domain.Contractor;
 import test.kneteng.testapp.domain.Manager;
 import test.kneteng.testapp.service.ContractorService;
 import test.kneteng.testapp.service.ManagerService;
 import test.kneteng.testapp.util.BeansToJSON;
+import test.kneteng.testapp.web.form.ContractorForm;
+import test.kneteng.testapp.web.form.ManagerForm;
 
 @Controller
 @RequestMapping("/contractor")
@@ -28,6 +28,8 @@ public class ContractorController {
 	private static final String ATT_MAX_CONTRACTOR_LIST = "contractors";
 	private static final String ATT_MAX_CONTRACTOR_SINGLE = "contractor";
 	private static final String ATT_ACTION = "action";
+	private static String ATT_ACTION_UPDATE = "../update";
+	private static String ATT_ACTION_SAVE = "save";
 	
 	
 	@Autowired
@@ -59,30 +61,34 @@ public class ContractorController {
 	
 	@GetMapping("new")
 	public String newContractor(Model model) {
-		/**
-		 * Creation of the bean that will be use for the creation of new contractor
-		 * */
+		 // Creation of the bean that will be used 
+		// for the creation of new contractor
 		Contractor contractor = new Contractor();
-		List<Manager> managers= new ArrayList<Manager>();
+		contractor = ContractorForm.addEmptyManager(contractor, ATT_MAX_MANAGERS);
 		
-		for(int i = 0; i < ATT_MAX_MANAGERS; i++) {
-			managers.add(new Manager());
-		}
-		
-		contractor.setManagers(managers);
-		
+		model.addAttribute(ATT_ACTION, ATT_ACTION_SAVE);
 		model.addAttribute(ATT_MAX_CONTRACTOR_SINGLE, contractor);
 		return "form/new_contractor";
 	}
 	
 	@GetMapping("details/{id}")
-	public String details(@PathVariable int id, Model m) throws Exception {
+	public String details(@PathVariable int id, Model model) throws Exception {
 		Contractor contractor = contractorService.find(id); 
+		contractor = ContractorForm.addEmptyManager(contractor, ATT_MAX_MANAGERS - contractor.getManagers().size());
+		// For the modification, all managers need to be visible
+		// We add the number of empty space necessary for 8 managers
 		
-		m.addAttribute(ATT_MAX_CONTRACTOR_SINGLE, contractor);
+		model.addAttribute(ATT_MAX_CONTRACTOR_SINGLE, contractor);
+		model.addAttribute(ATT_ACTION, ATT_ACTION_UPDATE);
 		
 		return "form/new_contractor";
 	}
+	
+	@GetMapping("delete/{id}")
+	public String delete(@PathVariable int id) throws Exception {
+		contractorService.delete(id);
+		return "redirect:../list";
+	} 
 	
 	@PostMapping("save")
 	public String addContractor(@ModelAttribute Contractor contractor) throws Exception {
@@ -92,7 +98,7 @@ public class ContractorController {
 		// Insertion of the managers
 		// Only if all the information is correct
 		for(Manager manager : managers) {
-			if(manager.getName() != null && !manager.getName().isEmpty()) {
+			if(!manager.isEmpty()) {
 				manager.setContractor(contractor);
 				managerService.insert(manager);
 			}
@@ -109,9 +115,14 @@ public class ContractorController {
 		// Insertion of the managers
 		// Only if all the information is correct
 		for(Manager manager : managers) {
-			if(manager.getName() != null && !manager.getName().isEmpty()) {
+			if(manager.getManagerNo() != 0 && !manager.isEmpty()) {
 				manager.setContractor(contractor);
 				managerService.update(manager);
+			}else if(manager.getManagerNo() != 0 && manager.isEmpty()) { // We delete if the manager exists in db but is empty
+				managerService.delete(manager.getManagerNo());
+			}else if(!manager.isEmpty()) {
+				manager.setContractor(contractor);
+				managerService.insert(manager);
 			}
 		}
 		

@@ -8,7 +8,7 @@
 <body>
 	<div class="container">
 		<h2>New Contractor</h2>
-		<form method="post" action="" th:action="@{save}" th:object="${contractor}">
+		<form method="post" action="" th:action="@{__${action}__}" th:object="${contractor}">
 			<div class="row">
 				<input th:if="*{contractorNo} != 0" id="company" type="hidden" th:field="*{contractorNo}"/>
 				<div class="col-lg-4">
@@ -71,7 +71,9 @@
 						    <tbody>
 				                <tr th:each="manager, itemStat : *{managers}">
 				                	<td th:text="${itemStat.index + 1}"></td>
-				                	<td><input id="name" type="text" class="form-control" th:field="*{managers[__${itemStat.index}__].name}"/></td>
+				                	<td>
+				                		<input id="id" type="hidden" th:if="*{managers[__${itemStat.index}__].managerNo} != 0" th:field="*{managers[__${itemStat.index}__].managerNo}"/>
+				                		<input id="name" type="text" class="form-control" th:field="*{managers[__${itemStat.index}__].name}"/></td>
 				                	<td><input id="department" type="text" class="form-control" th:field="*{managers[__${itemStat.index}__].department}"/></td>
 				                	<td><input id="tel" type="text" class="form-control" th:field="*{managers[__${itemStat.index}__].tel}"/></td>
 				                </tr>
@@ -82,7 +84,8 @@
 			
 			<div class="row">
 				<div class="col-lg-10">
-					<input type="submit" class="btn btn-primary pull-right" value="등록" />
+					<a class="btn btn-danger pull-right" th:if="*{contractorNo} != 0" th:href="@{../delete/__*{contractorNo}__}" th:text="삭제">삭제</a>
+					<input type="submit" class="btn btn-primary pull-right" value="등록" />  
 				</div>
 			</div>
 		</form>

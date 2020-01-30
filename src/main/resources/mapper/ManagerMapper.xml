@@ -22,7 +22,7 @@
    	
 	<!-- Deletion -->
 	<delete id = "delete" parameterType = "int">
-	   DELETE FROM MANAGER WHERE id = #{id};
+	   DELETE FROM MANAGER WHERE manager_id = #{managerNo};
 	</delete>
 	
    <!-- Adding a new Manager -->
@@ -37,7 +37,7 @@
 		SET name = #{name}, 
 			department = #{department}, 
 			tel = #{tel},
-			contractor_id = contractor.contractorNo
-		WHERE manager_id = {managerNo};
+			contractor_id = #{contractor.contractorNo}
+		WHERE manager_id = #{managerNo};
 	</update>
 </mapper>
