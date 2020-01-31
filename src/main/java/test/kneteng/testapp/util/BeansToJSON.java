@@ -11,21 +11,19 @@ import test.kneteng.testapp.domain.Contractor;
 public class BeansToJSON {
 	public static String ContractorsToJSON(List<Contractor> contractors) throws Exception {
 		StringBuilder resp = new StringBuilder();
-		resp.append("{\"data\": { contractors:");
+		resp.append("[");
 		
-		for(Contractor c: contractors) {
-			resp.append(c.toString());
+		int size = contractors.size();
+		for(int i = 0; i < size; i++)
+		{
+			resp.append(contractors.get(i).toString());
+
+			if(i != size-1)
+				resp.append(",");
 		}
 		
-		resp.append(contractors.toString());
-		resp.append("}");
+		resp.append("]");
 		
-        return resp.toString().replace("[[", "[").replace("]]", "]");
-	}
-	
-	public static String ManagerToJSON(Contractor c) throws JsonGenerationException, JsonMappingException, IOException {
-        // Create ObjectMapper
-        
-        return "";
+        return resp.toString()/*.replace("[[", "[").replace("]]", "]")*/;
 	}
 }

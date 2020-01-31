@@ -59,7 +59,7 @@ public class Manager implements Serializable {
 	
 	@Override
 	public String toString() {
-	    return "{managerNo:" + managerNo + ", name:" + name
-	    + ", department:" + department + ", tel:" + tel + "}";
+	    return "{\"managerNo\":\"" + managerNo + "\", \"name\":\"" + name
+	    + "\", \"department\":\"" + department + "\", \"tel\":\"" + tel + "\"}";
 	}
 }

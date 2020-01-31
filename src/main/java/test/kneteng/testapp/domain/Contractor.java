@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 public class Contractor implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -188,11 +186,11 @@ public int getContractorNo() {
 
 @Override
   public String toString() {
-    return "{contractorNo:" + contractorNo + ", company:" + company + ", crn:" + crn
-        + ", owner:" + owner + ", address:" + address + ", business:" + business + ", item:" + item
-        + ", tel:" + tel + ", fax:" + fax + ", accountNo:" + accountNo + ", lastDate:" + lastDate
-        + ", date:" + date + ", requisitionForm:" + requisitionForm + ", specification:"
-        + specification + ", productDrawing:" + productDrawing + ", managers:["+managers
-        + "]}";
+    return "{\"contractorNo\":" + contractorNo + ", \"company\":\"" + company + "\", \"crn\":\"" + crn
+        + "\", \"owner\":\"" + owner + "\", \"address\":\"" + address + "\", \"business\":\"" + business + "\", \"item\":\"" + item
+        + "\", \"tel\":\"" + tel + "\", \"fax\":\"" + fax + "\", \"accountNo\":\"" + accountNo + "\", \"lastDate\":\"" + lastDate
+        + "\", \"date\":\"" + date + "\", \"requisitionForm\":\"" + requisitionForm + "\", \"specification\":\""
+        + specification + "\", \"productDrawing\":\"" + productDrawing + "\", \"managers\":"+managers
+        + "}";
   }
 }

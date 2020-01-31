@@ -19,7 +19,6 @@ import test.kneteng.testapp.service.ContractorService;
 import test.kneteng.testapp.service.ManagerService;
 import test.kneteng.testapp.util.BeansToJSON;
 import test.kneteng.testapp.web.form.ContractorForm;
-import test.kneteng.testapp.web.form.ManagerForm;
 
 @Controller
 @RequestMapping("/contractor")
